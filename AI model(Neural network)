@@ -1,0 +1,22 @@
+AI model(Neural Network)
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+# Define the AI model architecture
+model = keras.Sequential([
+    layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),
+    layers.Dense(32, activation='relu'),
+    layers.Dense(16, activation='relu'),
+    layers.Dense(8, activation='relu'),
+    layers.Dense(4)  # Output layer for controlling solar systems, batteries, and heat pumps
+])
+
+# Compile the model
+model.compile(optimizer='adam', loss=tf.keras.losses.MeanSquaredError)
+
+# Train the AI model using historical energy usage data
+model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
+
+# Use the trained model to predict the optimal operation of solar systems, batteries, and heat pumps
+predictions = model.predict(X_test)
